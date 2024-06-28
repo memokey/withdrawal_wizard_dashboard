@@ -7,9 +7,10 @@ import {
     TableBody,
     TableRow,
     TableCell,
+    Callout,
 } from "@tremor/react";
 import Card from "../Common/Card";
-import "./TableStyle.css";
+import "../../styles/tableStyle.css";
 
 import { FinancialDataProps } from "@/data/types/global";
 
@@ -21,137 +22,122 @@ export function AccountBalanceTable(props: AccountBalanceTableProps) {
     const { balance_data } = props;
     return (
         <Card title="Account Balance Table">
-            <Table className="mt-5 text-center table-collapse">
+            <Table className="text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">
                 <TableHead>
                     <TableRow>
-                        <TableHeaderCell className="table-header-cell"></TableHeaderCell>
                         <TableHeaderCell
-                            colSpan={4}
-                            className="table-header-cell table-cell-s-p-500"
-                        >
-                            S&P 500
-                        </TableHeaderCell>
-                        <TableHeaderCell
+                            className="table-header-cell"
                             colSpan={3}
-                            className="table-header-cell table-cell-fia-index"
-                        >
-                            FIA + Index Par
+                        ></TableHeaderCell>
+                        <TableHeaderCell colSpan={4}>
+                            <Callout title="S&P 500" color="blue"></Callout>
                         </TableHeaderCell>
-                        <TableHeaderCell
-                            colSpan={3}
-                            className="table-header-cell table-cell-fia-index-bonus"
-                        >
-                            FIA + Index Par + Bonus
+                        <TableHeaderCell colSpan={3}>
+                            <Callout
+                                title="FIA + Index Par"
+                                color="orange"
+                            ></Callout>
                         </TableHeaderCell>
-                        <TableHeaderCell
-                            colSpan={3}
-                            className="table-header-cell table-cell-structured-notes"
-                        >
-                            Structured Notes
+                        <TableHeaderCell colSpan={3}>
+                            <Callout
+                                title="FIA + Index Par + Bonus (S)"
+                                className="!border-tremo-brand-primary"
+                                color={"green"}
+                            ></Callout>
+                        </TableHeaderCell>
+                        <TableHeaderCell colSpan={3}>
+                            <Callout
+                                title="Structured Notes (C)"
+                                color="gray"
+                            ></Callout>
                         </TableHeaderCell>
                     </TableRow>
                     <TableRow>
-                        <TableHeaderCell className="bg-red-100 text-center table-cell">
-                            Age
-                        </TableHeaderCell>
-                        <TableHeaderCell className="table-cell table-cell-s-p-500">
-                            Account Balance
-                        </TableHeaderCell>
-                        <TableHeaderCell className="table-cell table-cell-s-p-500">
-                            Growth
-                        </TableHeaderCell>
-                        <TableHeaderCell className="table-cell table-cell-s-p-500">
-                            Net Growth
-                        </TableHeaderCell>
-                        <TableHeaderCell className="table-cell table-cell-s-p-500">
-                            W/D
-                        </TableHeaderCell>
-                        <TableHeaderCell className="table-cell table-cell-fia-index">
-                            Account Balance
-                        </TableHeaderCell>
-                        <TableHeaderCell className="table-cell table-cell-fia-index">
-                            Growth
-                        </TableHeaderCell>
-                        <TableHeaderCell className="table-cell table-cell-fia-index">
-                            W/D
-                        </TableHeaderCell>
-                        <TableHeaderCell className="table-cell table-cell-fia-index-bonus">
-                            Account Balance
-                        </TableHeaderCell>
-                        <TableHeaderCell className="table-cell table-cell-fia-index-bonus">
-                            Growth
-                        </TableHeaderCell>
-                        <TableHeaderCell className="table-cell table-cell-fia-index-bonus">
-                            W/D
-                        </TableHeaderCell>
-                        <TableHeaderCell className="table-cell table-cell-structured-notes">
-                            Account Balance
-                        </TableHeaderCell>
-                        <TableHeaderCell className="table-cell table-cell-structured-notes">
-                            Growth
-                        </TableHeaderCell>
-                        <TableHeaderCell className="table-cell table-cell-structured-notes">
-                            W/D
-                        </TableHeaderCell>
+                        <TableHeaderCell>No</TableHeaderCell>
+                        <TableHeaderCell>Age</TableHeaderCell>
+                        <TableHeaderCell>Year</TableHeaderCell>
+                        <TableHeaderCell>Account Balance</TableHeaderCell>
+                        <TableHeaderCell>Growth</TableHeaderCell>
+                        <TableHeaderCell>Net Growth</TableHeaderCell>
+                        <TableHeaderCell>W/D</TableHeaderCell>
+                        <TableHeaderCell>Account Balance</TableHeaderCell>
+                        <TableHeaderCell>Growth</TableHeaderCell>
+                        <TableHeaderCell>W/D</TableHeaderCell>
+                        <TableHeaderCell>Account Balance</TableHeaderCell>
+                        <TableHeaderCell>Growth</TableHeaderCell>
+                        <TableHeaderCell>W/D</TableHeaderCell>
+                        <TableHeaderCell>Account Balance</TableHeaderCell>
+                        <TableHeaderCell>Growth</TableHeaderCell>
+                        <TableHeaderCell>W/D</TableHeaderCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {balance_data.map((item: FinancialDataProps) => {
-                        return (
-                            <TableRow key={item["Age"]}>
-                                <TableCell className="bg-red-100 text-center table-cell">
-                                    {item["Age"]}
-                                </TableCell>
-                                <TableCell className="table-cell table-cell-s-p-500">
-                                    {item["S&P 500"]["Account Balance"]}
-                                </TableCell>
-                                <TableCell className="table-cell table-cell-s-p-500">
-                                    {item["S&P 500"]["Growth"]}
-                                </TableCell>
-                                <TableCell className="table-cell table-cell-s-p-500">
-                                    {item["S&P 500"]["Net Growth"]}
-                                </TableCell>
-                                <TableCell className="table-cell table-cell-s-p-500">
-                                    {item["S&P 500"]["W/D"]}
-                                </TableCell>
-                                <TableCell className="table-cell table-cell-fia-index">
-                                    {item["FIA + Index Par"]["Account Balance"]}
-                                </TableCell>
-                                <TableCell className="table-cell table-cell-fia-index">
-                                    {item["FIA + Index Par"]["Growth"]}
-                                </TableCell>
-                                <TableCell className="table-cell table-cell-fia-index">
-                                    {item["FIA + Index Par"]["W/D"]}
-                                </TableCell>
-                                <TableCell className="table-cell table-cell-fia-index-bonus">
-                                    {
-                                        item["FIA + Index Par + Bonus"][
-                                            "Account Balance"
-                                        ]
-                                    }
-                                </TableCell>
-                                <TableCell className="table-cell table-cell-fia-index-bonus">
-                                    {item["FIA + Index Par + Bonus"]["Growth"]}
-                                </TableCell>
-                                <TableCell className="table-cell table-cell-fia-index-bonus">
-                                    {item["FIA + Index Par + Bonus"]["W/D"]}
-                                </TableCell>
-                                <TableCell className="table-cell table-cell-structured-notes">
-                                    {
-                                        item["Struntured Notes"][
-                                            "Account Balance"
-                                        ]
-                                    }
-                                </TableCell>
-                                <TableCell className="table-cell table-cell-structured-notes">
-                                    {item["Struntured Notes"]["Growth"]}
-                                </TableCell>
-                                <TableCell className="table-cell table-cell-structured-notes">
-                                    {item["Struntured Notes"]["W/D"]}
-                                </TableCell>
-                            </TableRow>
-                        );
-                    })}
+                    {balance_data.map(
+                        (item: FinancialDataProps, index: number) => {
+                            return (
+                                <TableRow key={item["Age"]}>
+                                    <TableCell>{index + 1}</TableCell>
+                                    <TableCell>{item["Age"]}</TableCell>
+                                    <TableCell>{1999 + index}</TableCell>
+                                    <TableCell>
+                                        {item["S&P 500"]["Account Balance"]}
+                                    </TableCell>
+                                    <TableCell>
+                                        {item["S&P 500"]["Growth"]}
+                                    </TableCell>
+                                    <TableCell>
+                                        {item["S&P 500"]["Net Growth"]}
+                                    </TableCell>
+                                    <TableCell>
+                                        {item["S&P 500"]["W/D"]}
+                                    </TableCell>
+                                    <TableCell>
+                                        {
+                                            item["FIA + Index Par"][
+                                                "Account Balance"
+                                            ]
+                                        }
+                                    </TableCell>
+                                    <TableCell>
+                                        {item["FIA + Index Par"]["Growth"]}
+                                    </TableCell>
+                                    <TableCell>
+                                        {item["FIA + Index Par"]["W/D"]}
+                                    </TableCell>
+                                    <TableCell>
+                                        {
+                                            item["FIA + Index Par + Bonus"][
+                                                "Account Balance"
+                                            ]
+                                        }
+                                    </TableCell>
+                                    <TableCell>
+                                        {
+                                            item["FIA + Index Par + Bonus"][
+                                                "Growth"
+                                            ]
+                                        }
+                                    </TableCell>
+                                    <TableCell>
+                                        {item["FIA + Index Par + Bonus"]["W/D"]}
+                                    </TableCell>
+                                    <TableCell>
+                                        {
+                                            item["Struntured Notes"][
+                                                "Account Balance"
+                                            ]
+                                        }
+                                    </TableCell>
+                                    <TableCell>
+                                        {item["Struntured Notes"]["Growth"]}
+                                    </TableCell>
+                                    <TableCell>
+                                        {item["Struntured Notes"]["W/D"]}
+                                    </TableCell>
+                                </TableRow>
+                            );
+                        }
+                    )}
                 </TableBody>
             </Table>
         </Card>

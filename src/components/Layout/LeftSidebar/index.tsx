@@ -15,17 +15,17 @@ import {
     RiPsychotherapyFill,
     RiPsychotherapyLine,
 } from "@remixicon/react";
-import { Divider, TextInput } from "@tremor/react";
+import { Badge, Divider, TextInput } from "@tremor/react";
 import { DEFAULT_INPUTS } from "@/data";
 
 const LeftSidebar = () => {
     return (
-        <aside className="flex grow flex-col gap-y-6 overflow-y-auto border-r border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-gray-950">
+        <aside className="flex grow flex-col gap-y-6 overflow-y-auto border-r border-gray-200 bg-white py-4 dark:border-gray-800 dark:bg-gray-950">
             <div className="flex flex-1 flex-col">
-                <div className="flex justify-center">
+                <div className="flex justify-center mt-4 px-4">
                     <Logo />
                 </div>
-                <div className="mt-[40px] h-[calc(100vh-188px)] overflow-y-auto">
+                <div className="mt-[40px] h-[calc(100vh-188px)] overflow-y-auto px-4">
                     <div className="">
                         <Divider className="my-2">Default Values</Divider>
                         <div className="col-span-full sm:col-span-3 h-[90px]">
@@ -80,7 +80,9 @@ const LeftSidebar = () => {
                         </div>
                     </div>
                     <div className="mt-[10px]">
-                        <Divider className="my-2">S&P 500 Index</Divider>
+                        <Divider className="my-2">
+                            <Badge>S&P 500 Index</Badge>
+                        </Divider>
                         <div className="col-span-full sm:col-span-3 h-[90px]">
                             <label className="text-sm leading-none text-gray-600 dark:text-gray-50 font-medium">
                                 Desired allocation (%)
@@ -88,15 +90,140 @@ const LeftSidebar = () => {
                             <TextInput
                                 className="mx-auto max-w-xs mt-1"
                                 icon={RiPercentFill}
-                                placeholder="Years"
+                                placeholder="Allocation"
                                 type="number"
                                 defaultValue={DEFAULT_INPUTS.sp_rate}
+                            />
+                        </div>
+                        <div className="col-span-full sm:col-span-3 h-[90px]">
+                            <label className="text-sm leading-none text-gray-600 dark:text-gray-50 font-medium">
+                                Withdrawals
+                            </label>
+                            <TextInput
+                                className="mx-auto max-w-xs mt-1"
+                                icon={RiMoneyDollarCircleFill}
+                                placeholder="Withdrawals"
+                                type="number"
+                                defaultValue={DEFAULT_INPUTS.wd_money}
+                            />
+                        </div>
+                    </div>
+                    <div className="mt-[10px]">
+                        <Divider className="my-2">
+                            <Badge color={"orange"}>FIA + Index Par</Badge>
+                        </Divider>
+                        <div className="col-span-full sm:col-span-3 h-[90px]">
+                            <label className="text-sm leading-none text-gray-600 dark:text-gray-50 font-medium">
+                                Desired allocation (%)
+                            </label>
+                            <TextInput
+                                className="mx-auto max-w-xs mt-1"
+                                icon={RiPercentFill}
+                                placeholder="Allocation"
+                                type="number"
+                                defaultValue={DEFAULT_INPUTS.sp_rate}
+                            />
+                        </div>
+                        <div className="col-span-full sm:col-span-3 h-[90px]">
+                            <label className="text-sm leading-none text-gray-600 dark:text-gray-50 font-medium">
+                                Index Participation Rate (%)
+                            </label>
+                            <TextInput
+                                className="mx-auto max-w-xs mt-1"
+                                icon={RiPercentFill}
+                                placeholder="Allocation"
+                                type="number"
+                                defaultValue={DEFAULT_INPUTS.in_par}
+                            />
+                        </div>
+                        <div className="col-span-full sm:col-span-3 h-[90px]">
+                            <label className="text-sm leading-none text-gray-600 dark:text-gray-50 font-medium">
+                                Withdrawals
+                            </label>
+                            <TextInput
+                                className="mx-auto max-w-xs mt-1"
+                                icon={RiMoneyDollarCircleFill}
+                                placeholder="Withdrawals"
+                                type="number"
+                                defaultValue={DEFAULT_INPUTS.wd_money}
+                            />
+                        </div>
+                    </div>
+                    <div className="mt-[10px]">
+                        <Divider className="my-2">
+                            <Badge color={"green"}>
+                                FIA + Index Par + Bonus
+                            </Badge>
+                        </Divider>
+                        <div className="col-span-full sm:col-span-3 h-[90px]">
+                            <label className="text-sm leading-none text-gray-600 dark:text-gray-50 font-medium">
+                                Desired allocation (%)
+                            </label>
+                            <TextInput
+                                className="mx-auto max-w-xs mt-1"
+                                icon={RiPercentFill}
+                                placeholder="Allocation"
+                                type="number"
+                                defaultValue={DEFAULT_INPUTS.sp_rate}
+                            />
+                        </div>
+                        <div className="col-span-full sm:col-span-3 h-[90px]">
+                            <label className="text-sm leading-none text-gray-600 dark:text-gray-50 font-medium">
+                                Bonus (%)
+                            </label>
+                            <TextInput
+                                className="mx-auto max-w-xs mt-1"
+                                icon={RiPercentFill}
+                                placeholder="Bonus"
+                                type="number"
+                                defaultValue={DEFAULT_INPUTS.in_par}
+                            />
+                        </div>
+                        <div className="col-span-full sm:col-span-3 h-[90px]">
+                            <label className="text-sm leading-none text-gray-600 dark:text-gray-50 font-medium">
+                                Withdrawals
+                            </label>
+                            <TextInput
+                                className="mx-auto max-w-xs mt-1"
+                                icon={RiMoneyDollarCircleFill}
+                                placeholder="Withdrawals"
+                                type="number"
+                                defaultValue={DEFAULT_INPUTS.wd_money}
+                            />
+                        </div>
+                    </div>
+                    <div className="mt-[10px]">
+                        <Divider className="my-2">
+                            <Badge color={"gray"}>Structured Notes</Badge>
+                        </Divider>
+                        <div className="col-span-full sm:col-span-3 h-[90px]">
+                            <label className="text-sm leading-none text-gray-600 dark:text-gray-50 font-medium">
+                                Desired allocation (%)
+                            </label>
+                            <TextInput
+                                className="mx-auto max-w-xs mt-1"
+                                icon={RiPercentFill}
+                                placeholder="Allocation"
+                                type="number"
+                                defaultValue={DEFAULT_INPUTS.sp_rate}
+                            />
+                        </div>
+                        <div className="col-span-full sm:col-span-3 h-[90px]">
+                            <label className="text-sm leading-none text-gray-600 dark:text-gray-50 font-medium">
+                                Withdrawals
+                            </label>
+                            <TextInput
+                                className="mx-auto max-w-xs mt-1"
+                                icon={RiMoneyDollarCircleFill}
+                                placeholder="Withdrawals"
+                                type="number"
+                                defaultValue={DEFAULT_INPUTS.wd_money}
                             />
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="lg:w-full">
+            <div className="lg:w-full px-4">
                 <DropDownProfile>
                     <Button
                         aria-label="User settings"

@@ -6,18 +6,18 @@ import { BarChartHero } from "@/components/Charts/BarChart";
 import { AccountBalanceTable } from "@/components/Table/AccountBalanceTable";
 
 import json_data from "@/data/moke-data/chartData.json";
-import { AccountDetailsProps, FinancialDataProps } from "@/data/types/global";
+import { FinancialDataProps } from "@/data/types/global";
 
 const financial_data: FinancialDataProps[] = json_data;
 
 export default function Home() {
     return (
         <Layout leftSidebar={<LeftSidebar />}>
-            <div className="">
-                <div className="mt-4 text-tremor-metric font-bold font-extrabold normal-case tracking-tight sm:text-3xl mb-0">
+            <div className="mb-5">
+                <div className="mt-4 text-tremor-brand-secondary font-bold font-extrabold normal-case tracking-tight sm:text-3xl mb-0">
                     Withdrawal Wizard
                 </div>
-                <h3 className="text-lg text-slate-700">
+                <h3 className="text-lg text-tremor-brand-secondary">
                     Distribution Risk Analyzer
                 </h3>
             </div>

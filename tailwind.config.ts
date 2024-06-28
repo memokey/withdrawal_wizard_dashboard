@@ -15,6 +15,45 @@ const config: Config = {
     extend: {
       colors: {
         // light mode
+        green: {
+          50: '#f3f7e8',
+          100: '#e1efbf',
+          200: '#c8e493',
+          300: '#a8d661',
+          400: '#90c94c',
+          500: '#8cc44f', // Custom green color
+          600: '#77b343',
+          700: '#609635',
+          800: '#49792a',
+          900: '#365f21',
+          950: '#1f3a13',
+        },
+        gray: {
+          50: '#f9fafb',
+          100: '#f3f4f6',
+          200: '#e5e7eb',
+          300: '#d1d5db',
+          400: '#9ca3af',
+          500: '#606060',
+          600: '#606060',
+          700: '#606060',
+          800: '#606060',
+          900: '#606060',
+          DEFAULT: '#606060', // Custom gray color
+        },
+        orange: {
+          50: '#fff7f3',
+          100: '#ffead6',
+          200: '#ffcfac',
+          300: '#ffab75',
+          400: '#ff8a4c',
+          500: '#ec732a',
+          600: '#ec732a', // Custom orange color
+          700: '#ec732a',
+          800: '#ec732a',
+          900: '#ec732a',
+          950: '#ec732a',
+        },
         tremor: {
           brand: {
             faint: colors.blue[50],
@@ -24,7 +63,7 @@ const config: Config = {
             emphasis: colors.blue[700],
             inverted: colors.white,
             primary: '#8cc44f',
-            seconday: '#606060',
+            secondary: '#606060',
           },
           background: {
             muted: colors.gray[50],

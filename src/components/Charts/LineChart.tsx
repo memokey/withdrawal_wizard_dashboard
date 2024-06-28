@@ -34,7 +34,7 @@ export function LineChartHero(props: LineChartHeroProps) {
                     "FIA + Index Par + Bonus",
                     "Struntured Notes",
                 ]}
-                colors={["blue", "red", "green", "gray"]}
+                colors={["blue", "orange", "green", "gray"]}
                 valueFormatter={dataFormatter}
                 yAxisWidth={80}
                 onValueChange={(v) => console.log(v)}

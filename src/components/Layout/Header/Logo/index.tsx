@@ -8,8 +8,8 @@ const Logo = () => {
             <Image
                 src={"/images/Logo-01.png"}
                 alt="logo"
-                width={188}
-                height={36}
+                width={210}
+                height={24}
             />
         </Link>
     );

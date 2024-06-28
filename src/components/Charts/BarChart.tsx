@@ -9,7 +9,7 @@ interface BarChartHeroProps {
 }
 
 const dataFormatter = (number: number) =>
-    Intl.NumberFormat("us").format(number).toString();
+    Intl.NumberFormat("us").format(number).toString() + "%";
 
 export function BarChartHero(props: BarChartHeroProps) {
     const { barchart_data } = props;
@@ -32,13 +32,13 @@ export function BarChartHero(props: BarChartHeroProps) {
         },
     ];
     return (
-        <Card title="Avg ROR Cap">
+        <Card title="Avg RoR Cap">
             <BarChart
                 className="mt-6"
                 data={chart_data}
                 index="name"
                 categories={["S&P 500", "FIA", "FIA+B", "SN"]}
-                colors={["blue", "red", "green", "gray"]}
+                colors={["blue", "orange", "green", "gray"]}
                 valueFormatter={dataFormatter}
                 yAxisWidth={36}
             />
