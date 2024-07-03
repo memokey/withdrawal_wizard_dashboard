@@ -10,7 +10,7 @@ import {
     Callout,
 } from "@tremor/react";
 import Card from "../Common/Card";
-import "../../styles/tableStyle.css";
+import "../../styles/table.css";
 
 import { FinancialDataProps } from "@/data/types/global";
 
@@ -30,7 +30,10 @@ export function AccountBalanceTable(props: AccountBalanceTableProps) {
                             colSpan={3}
                         ></TableHeaderCell>
                         <TableHeaderCell colSpan={4}>
-                            <Callout title="S&P 500" color="blue"></Callout>
+                            <Callout
+                                title="S&P 500 Index"
+                                color="blue"
+                            ></Callout>
                         </TableHeaderCell>
                         <TableHeaderCell colSpan={3}>
                             <Callout
@@ -56,17 +59,17 @@ export function AccountBalanceTable(props: AccountBalanceTableProps) {
                         <TableHeaderCell>No</TableHeaderCell>
                         <TableHeaderCell>Age</TableHeaderCell>
                         <TableHeaderCell>Year</TableHeaderCell>
-                        <TableHeaderCell>Account Balance</TableHeaderCell>
+                        <TableHeaderCell>Balance</TableHeaderCell>
                         <TableHeaderCell>Growth</TableHeaderCell>
                         <TableHeaderCell>Net Growth</TableHeaderCell>
                         <TableHeaderCell>W/D</TableHeaderCell>
-                        <TableHeaderCell>Account Balance</TableHeaderCell>
+                        <TableHeaderCell>Balance</TableHeaderCell>
                         <TableHeaderCell>Growth</TableHeaderCell>
                         <TableHeaderCell>W/D</TableHeaderCell>
-                        <TableHeaderCell>Account Balance</TableHeaderCell>
+                        <TableHeaderCell>Balance</TableHeaderCell>
                         <TableHeaderCell>Growth</TableHeaderCell>
                         <TableHeaderCell>W/D</TableHeaderCell>
-                        <TableHeaderCell>Account Balance</TableHeaderCell>
+                        <TableHeaderCell>Balance</TableHeaderCell>
                         <TableHeaderCell>Growth</TableHeaderCell>
                         <TableHeaderCell>W/D</TableHeaderCell>
                     </TableRow>
@@ -79,59 +82,59 @@ export function AccountBalanceTable(props: AccountBalanceTableProps) {
                                     <TableCell>{index + 1}</TableCell>
                                     <TableCell>{item["Age"]}</TableCell>
                                     <TableCell>{1999 + index}</TableCell>
-                                    <TableCell>
+                                    <TableCell className="bg-[#3b82f61a]">
                                         {item["S&P 500"]["Account Balance"]}
                                     </TableCell>
-                                    <TableCell>
+                                    <TableCell className="bg-[#3b82f61a]">
                                         {item["S&P 500"]["Growth"]}
                                     </TableCell>
-                                    <TableCell>
+                                    <TableCell className="bg-[#3b82f61a]">
                                         {item["S&P 500"]["Net Growth"]}
                                     </TableCell>
-                                    <TableCell>
+                                    <TableCell className="bg-[#3b82f61a]">
                                         {item["S&P 500"]["W/D"]}
                                     </TableCell>
-                                    <TableCell>
+                                    <TableCell className="bg-[#ec732a1a]">
                                         {
                                             item["FIA + Index Par"][
                                                 "Account Balance"
                                             ]
                                         }
                                     </TableCell>
-                                    <TableCell>
+                                    <TableCell className="bg-[#ec732a1a]">
                                         {item["FIA + Index Par"]["Growth"]}
                                     </TableCell>
-                                    <TableCell>
+                                    <TableCell className="bg-[#ec732a1a]">
                                         {item["FIA + Index Par"]["W/D"]}
                                     </TableCell>
-                                    <TableCell>
+                                    <TableCell className="bg-[#8cc44f1a]">
                                         {
                                             item["FIA + Index Par + Bonus"][
                                                 "Account Balance"
                                             ]
                                         }
                                     </TableCell>
-                                    <TableCell>
+                                    <TableCell className="bg-[#8cc44f1a]">
                                         {
                                             item["FIA + Index Par + Bonus"][
                                                 "Growth"
                                             ]
                                         }
                                     </TableCell>
-                                    <TableCell>
+                                    <TableCell className="bg-[#8cc44f1a]">
                                         {item["FIA + Index Par + Bonus"]["W/D"]}
                                     </TableCell>
-                                    <TableCell>
+                                    <TableCell className="bg-[#6060601a]">
                                         {
                                             item["Struntured Notes"][
                                                 "Account Balance"
                                             ]
                                         }
                                     </TableCell>
-                                    <TableCell>
+                                    <TableCell className="bg-[#6060601a]">
                                         {item["Struntured Notes"]["Growth"]}
                                     </TableCell>
-                                    <TableCell>
+                                    <TableCell className="bg-[#6060601a]">
                                         {item["Struntured Notes"]["W/D"]}
                                     </TableCell>
                                 </TableRow>

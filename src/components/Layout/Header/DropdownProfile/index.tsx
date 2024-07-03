@@ -13,20 +13,32 @@ import {
 import { RiArrowRightUpLine } from "@remixicon/react";
 import React from "react";
 import { DropdownUserProfileProps } from "@/data/types/global";
+import { usePrivy } from "@privy-io/react-auth";
+import { useAppDispatch } from "@/redux/hooks";
+import { setNoticeModal } from "@/redux/slices/calcSlice";
 
 const DropDownProfile = ({
     children,
     align = "start",
 }: DropdownUserProfileProps) => {
+    const dispath = useAppDispatch();
+    const { ready, authenticated, logout, login } = usePrivy();
+
+    const signout = () => {
+        logout();
+    };
+
+    const disableLogout = !ready || (ready && !authenticated);
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>{children}</DropdownMenuTrigger>
             <DropdownMenuContent align={align}>
-                <DropdownMenuLabel>emma.stone@acme.com</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
-                    <DropdownMenuItem>
-                        Documentation
+                    <DropdownMenuItem
+                        onClick={() => dispath(setNoticeModal(true))}
+                    >
+                        What the tool
                         <RiArrowRightUpLine
                             className="mb-1 ml-1 size-2.5 shrink-0 text-gray-500"
                             aria-hidden="true"
@@ -35,7 +47,12 @@ const DropDownProfile = ({
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
-                    <DropdownMenuItem>Sign out</DropdownMenuItem>
+                    <DropdownMenuItem
+                        disabled={disableLogout}
+                        onClick={signout}
+                    >
+                        Sign out
+                    </DropdownMenuItem>
                 </DropdownMenuGroup>
             </DropdownMenuContent>
         </DropdownMenu>

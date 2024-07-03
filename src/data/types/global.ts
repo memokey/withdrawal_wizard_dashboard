@@ -35,3 +35,8 @@ export type CardType = {
   children: ReactNode;
   styles?: string;
 }
+
+export type SP500Growth = {
+  year: number;
+  growth: number;
+};
