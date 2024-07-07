@@ -47,8 +47,8 @@ export const validateBeginningYear = (
         onError("Beginning year is required.");
         return false;
     }
-    if (value <= 2023 && value >= 1970) {
-        onError("Beginning year must be after 2024.");
+    if (value > 2023 || value < 1970) {
+        onError("Beginning year must be between 1970 and 2023.");
         return false;
     }
     onError("");

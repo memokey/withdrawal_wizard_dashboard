@@ -7,21 +7,21 @@ import React, { useEffect } from "react";
 import { NoticeModal } from "../Common/Modal";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setNoticeModal } from "@/redux/slices/calcSlice";
+import { BounceLoader } from "react-spinners";
 
 // Use the data with the defined type
 
 const Layout = (props: LayoutType) => {
     const dispatch = useAppDispatch();
 
-    const { noticeModal } = useAppSelector((state) => state.calc);
+    const { isNoticeModal, isLoading } = useAppSelector((state) => state.calc);
 
     useEffect(() => {
-        const noticeLocalModal = localStorage.getItem("notice-modal");
-        console.log(noticeLocalModal);
-        if (!noticeLocalModal || noticeLocalModal == "") {
-            localStorage.setItem("notice-modal", "true");
-            dispatch(setNoticeModal(true));
-        }
+        // const noticeLocalModal = localStorage.getItem("notice-modal");
+        // if (!noticeLocalModal || noticeLocalModal == "") {
+        //     localStorage.setItem("notice-modal", "true");
+        dispatch(setNoticeModal(true));
+        // }
     }, []);
 
     return (
@@ -34,7 +34,20 @@ const Layout = (props: LayoutType) => {
                 <div className="">{props.children}</div>
             </div>
             {!!props.footer && props.footer}
-            {noticeModal && <NoticeModal />}
+            {isNoticeModal && <NoticeModal />}
+            <div
+                className={`absolute top-0 left-0 right-0 bottom-0 w-full h-fullflex pt-[calc(50vh-30px)] pl-[calc(50vw-30px)] justify-between ${
+                    isLoading ? "bg-white z-[100]" : "bg-transparent z-[-10]"
+                } duration-75`}
+            >
+                <BounceLoader
+                    color={"#8cc44f"}
+                    loading={isLoading}
+                    size={60}
+                    aria-label="Loading Spinner"
+                    data-testid="loader"
+                />
+            </div>
         </div>
     );
 };

@@ -4,23 +4,20 @@ import { LineChart } from "@tremor/react";
 
 import { FinancialDataProps } from "@/data/types/global";
 import Card from "../Common/Card";
-
-interface LineChartHeroProps {
-    linechart_data: FinancialDataProps[];
-}
+import { useAppSelector } from "@/redux/hooks";
 
 const dataFormatter = (number: number) =>
     `$${Intl.NumberFormat("us").format(number).toString()}`;
 
-export function LineChartHero(props: LineChartHeroProps) {
-    const { linechart_data } = props;
-    const chart_data = linechart_data.map((item: FinancialDataProps) => ({
+export function LineChartHero() {
+    const { balances } = useAppSelector((state) => state.calc);
+
+    const chart_data = balances.map((item: any) => ({
         year: item.year,
-        "S&P 500 Index": item["S&P 500"]["Account Balance"],
-        "FIA + Index Par": item["FIA + Index Par"]["Account Balance"],
-        "FIA + Index Par + Bonus":
-            item["FIA + Index Par + Bonus"]["Account Balance"],
-        "Struntured Notes": item["Struntured Notes"]["Account Balance"],
+        "S&P 500 Index": item.sp.balance,
+        "FIA + Index Par": item.inPar.balance,
+        "FIA + Index Par + Bonus": item.inParBonus.balance,
+        "Struntured Notes": item.sn.balance,
     }));
     return (
         <Card title="Account Balance">
@@ -34,7 +31,7 @@ export function LineChartHero(props: LineChartHeroProps) {
                     "FIA + Index Par + Bonus",
                     "Struntured Notes",
                 ]}
-                colors={["blue", "orange", "green", "gray"]}
+                colors={["orange", "gray", "green", "blue"]}
                 valueFormatter={dataFormatter}
                 yAxisWidth={80}
                 onValueChange={(v) => console.log(v)}

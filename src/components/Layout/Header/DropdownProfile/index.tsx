@@ -15,7 +15,7 @@ import React from "react";
 import { DropdownUserProfileProps } from "@/data/types/global";
 import { usePrivy } from "@privy-io/react-auth";
 import { useAppDispatch } from "@/redux/hooks";
-import { setNoticeModal } from "@/redux/slices/calcSlice";
+import { setIsLoading, setNoticeModal } from "@/redux/slices/calcSlice";
 
 const DropDownProfile = ({
     children,
@@ -25,6 +25,7 @@ const DropDownProfile = ({
     const { ready, authenticated, logout, login } = usePrivy();
 
     const signout = () => {
+        dispath(setIsLoading(true));
         logout();
     };
 

@@ -3,32 +3,29 @@
 import { BarChart } from "@tremor/react";
 import { FinancialDataProps } from "@/data/types/global";
 import Card from "../Common/Card";
-
-interface BarChartHeroProps {
-    barchart_data: FinancialDataProps[];
-}
+import { useAppSelector } from "@/redux/hooks";
 
 const dataFormatter = (number: number) =>
     Intl.NumberFormat("us").format(number).toString() + "%";
 
-export function BarChartHero(props: BarChartHeroProps) {
-    const { barchart_data } = props;
+export function BarChartHero() {
+    const { avgGrowth } = useAppSelector((state) => state.calc);
     const chart_data = [
         {
             name: "S&P 500",
-            "S&P 500": 7.29,
+            "S&P 500": avgGrowth.sp,
         },
         {
             name: "FIA",
-            FIA: 9.7,
+            FIA: avgGrowth.inPar,
         },
         {
             name: "FIA+B",
-            "FIA+B": 12,
+            "FIA+B": avgGrowth.inParBonus,
         },
         {
             name: "SN",
-            SN: 8,
+            SN: avgGrowth.sn,
         },
     ];
     return (
@@ -38,7 +35,7 @@ export function BarChartHero(props: BarChartHeroProps) {
                 data={chart_data}
                 index="name"
                 categories={["S&P 500", "FIA", "FIA+B", "SN"]}
-                colors={["blue", "orange", "green", "gray"]}
+                colors={["orange", "gray", "green", "blue"]}
                 valueFormatter={dataFormatter}
                 yAxisWidth={36}
             />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "../Header/Logo";
 import DropDownProfile from "../Header/DropdownProfile";
 import { Button } from "@/components/Common/Button";
@@ -20,9 +20,19 @@ import {
     validateField,
     validateYears,
 } from "@/utils/validate";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import {
+    setAvgGrowth,
+    setBalances,
+    setFinalGrowth,
+    setIsLoading,
+} from "@/redux/slices/calcSlice";
 
 const LeftSidebar = () => {
     const { user } = usePrivy();
+    const dispatch = useAppDispatch();
+
+    const { snGrowth, calcAction } = useAppSelector((state) => state.calc);
 
     // State for form inputs and errors
     const [investment, setInvestment] = useState<number>(
@@ -38,14 +48,18 @@ const LeftSidebar = () => {
     const [spRate, setSpRate] = useState<number>(DEFAULT_INPUTS.sp_rate);
     const [wdMoney, setWdMoney] = useState<number>(DEFAULT_INPUTS.wd_money);
     const [inPar, setInPar] = useState<number>(DEFAULT_INPUTS.in_par);
+    const [inParRate, setInParRate] = useState<number>(DEFAULT_INPUTS.sp_rate);
     const [inParWdMoney, setInParWdMoney] = useState<number>(
         DEFAULT_INPUTS.wd_money
+    );
+    const [inParBonusRate, setInParBonusRate] = useState<number>(
+        DEFAULT_INPUTS.sp_rate
     );
     const [inParBonus, setInParBonus] = useState<number>(DEFAULT_INPUTS.bonus);
     const [inParBonusWdMoney, setInParBonusWdMoney] = useState(
         DEFAULT_INPUTS.wd_money
     );
-    const [sn, setSn] = useState<number>(DEFAULT_INPUTS.sp_rate);
+    const [snRate, setSnRate] = useState<number>(DEFAULT_INPUTS.sp_rate);
     const [snWdMoney, setSnWdMoney] = useState<number>(DEFAULT_INPUTS.wd_money);
 
     // State for validation errors
@@ -56,13 +70,15 @@ const LeftSidebar = () => {
     const [spRateError, setSpRateError] = useState("");
     const [wdMoneyError, setWdMoneyError] = useState("");
     const [inParError, setInParError] = useState("");
+    const [inParRateError, setInParRateError] = useState("");
     const [inParWdMoneyError, setInParWdMoneyError] = useState("");
+    const [inParBonusRateError, setInParBonusRateError] = useState("");
     const [inParBonusError, setInParBonusError] = useState("");
     const [inParBonusWdMoneyError, setInParBonusWdMoneyError] = useState("");
-    const [snError, setSnError] = useState("");
+    const [snRateError, setSnRateError] = useState("");
     const [snWdMoneyError, setSnWdMoneyError] = useState("");
 
-    const calcAccuntBalance = () => {
+    const calcAccuntBalance = async () => {
         // Ignore if the validation is not correct.
         if (
             investmentError != "" ||
@@ -72,7 +88,51 @@ const LeftSidebar = () => {
         ) {
             return;
         }
+        dispatch(setIsLoading(true));
+        try {
+            const response = await fetch("/api/calculate-rate", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    investment,
+                    clientAge,
+                    years,
+                    beginningYear,
+                    spRate,
+                    wdMoney,
+                    inPar,
+                    inParRate,
+                    inParWdMoney,
+                    inParBonusRate,
+                    inParBonus,
+                    inParBonusWdMoney,
+                    snRate,
+                    snWdMoney,
+                    snGrowth: snGrowth.slice(
+                        beginningYear - 1970,
+                        beginningYear - 1970 + years
+                    ),
+                }),
+            });
+            const data = await response.json();
+            dispatch(setBalances(data.history));
+            dispatch(setAvgGrowth(data.avgGrowth));
+            dispatch(setFinalGrowth(data.final));
+            dispatch(setIsLoading(false));
+        } catch (error: any) {
+            console.log(error.message);
+            dispatch(setIsLoading(false));
+        }
     };
+
+    useEffect(() => {
+        calcAccuntBalance();
+    }, [calcAction]);
+
+    // Update sn's growth
+    const updateSnGrowth = (yrs: number) => {};
 
     // Handle form submission or field changes
     const handleInvestmentChange = (value: number) => {
@@ -105,6 +165,11 @@ const LeftSidebar = () => {
         validateField(value, setWdMoneyError);
     };
 
+    const handleInParRateChange = (value: number) => {
+        setInParRate(value);
+        validateField(value, setInParRateError);
+    };
+
     const handleInParChange = (value: number) => {
         setInPar(value);
         validateField(value, setInParError);
@@ -113,6 +178,11 @@ const LeftSidebar = () => {
     const handleInParWdMoneyChange = (value: number) => {
         setInParWdMoney(value);
         validateField(value, setInParWdMoneyError);
+    };
+
+    const handleInParBonusRateChange = (value: number) => {
+        setInParBonusRate(value);
+        validateField(value, setInParBonusRateError);
     };
 
     const handleInParBonusChange = (value: number) => {
@@ -125,9 +195,9 @@ const LeftSidebar = () => {
         validateField(value, setInParBonusWdMoneyError);
     };
 
-    const handleSnChange = (value: number) => {
-        setSn(value);
-        validateField(value, setSnError);
+    const handleSnRateChange = (value: number) => {
+        setSnRate(value);
+        validateField(value, setSnRateError);
     };
 
     const handleSnWdMoneyChange = (value: number) => {
@@ -209,6 +279,7 @@ const LeftSidebar = () => {
                                     handleYearsChange(parseInt(e.target.value))
                                 }
                                 onBlur={(e) => {
+                                    updateSnGrowth(parseInt(e.target.value));
                                     calcAccuntBalance();
                                     handleYearsChange(parseInt(e.target.value));
                                 }}
@@ -303,7 +374,32 @@ const LeftSidebar = () => {
                         </Divider>
                         <div className="col-span-full sm:col-span-3 h-[90px]">
                             <label className="text-sm leading-none text-gray-600 dark:text-gray-50 font-medium">
-                                Index Par
+                                Desired allocation (%)
+                            </label>
+                            <TextInput
+                                className="mx-auto max-w-xs mt-1"
+                                icon={RiPercentFill}
+                                placeholder="Allocation"
+                                type="number"
+                                value={inParRate.toString()}
+                                onChange={(e) =>
+                                    handleInParRateChange(
+                                        parseFloat(e.target.value)
+                                    )
+                                }
+                                onBlur={(e) => {
+                                    calcAccuntBalance();
+                                    handleInParRateChange(
+                                        parseFloat(e.target.value)
+                                    );
+                                }}
+                                error={!!inParRateError}
+                                errorMessage={inParRateError}
+                            />
+                        </div>
+                        <div className="col-span-full sm:col-span-3 h-[90px]">
+                            <label className="text-sm leading-none text-gray-600 dark:text-gray-50 font-medium">
+                                Index Par (%)
                             </label>
                             <TextInput
                                 className="mx-auto max-w-xs mt-1"
@@ -358,6 +454,31 @@ const LeftSidebar = () => {
                                 FIA + Index Par + Bonus
                             </Badge>
                         </Divider>
+                        <div className="col-span-full sm:col-span-3 h-[90px]">
+                            <label className="text-sm leading-none text-gray-600 dark:text-gray-50 font-medium">
+                                Desired allocation (%)
+                            </label>
+                            <TextInput
+                                className="mx-auto max-w-xs mt-1"
+                                icon={RiPercentFill}
+                                placeholder="Allocation"
+                                type="number"
+                                value={inParBonusRate.toString()}
+                                onChange={(e) =>
+                                    handleInParBonusRateChange(
+                                        parseFloat(e.target.value)
+                                    )
+                                }
+                                onBlur={(e) => {
+                                    calcAccuntBalance();
+                                    handleInParBonusRateChange(
+                                        parseFloat(e.target.value)
+                                    );
+                                }}
+                                error={!!inParBonusRateError}
+                                errorMessage={inParBonusRateError}
+                            />
+                        </div>
                         <div className="col-span-full sm:col-span-3 h-[90px]">
                             <label className="text-sm leading-none text-gray-600 dark:text-gray-50 font-medium">
                                 Bonus (%)
@@ -422,16 +543,20 @@ const LeftSidebar = () => {
                                 icon={RiPercentFill}
                                 placeholder="Allocation"
                                 type="number"
-                                value={sn.toString()}
+                                value={snRate.toString()}
                                 onChange={(e) =>
-                                    handleSnChange(parseFloat(e.target.value))
+                                    handleSnRateChange(
+                                        parseFloat(e.target.value)
+                                    )
                                 }
                                 onBlur={(e) => {
                                     calcAccuntBalance();
-                                    handleSnChange(parseFloat(e.target.value));
+                                    handleSnRateChange(
+                                        parseFloat(e.target.value)
+                                    );
                                 }}
-                                error={!!snError}
-                                errorMessage={snError}
+                                error={!!snRateError}
+                                errorMessage={snRateError}
                             />
                         </div>
                         <div className="col-span-full sm:col-span-3 h-[90px]">

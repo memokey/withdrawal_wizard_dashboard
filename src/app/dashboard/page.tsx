@@ -28,16 +28,14 @@ const Dashboard = () => {
         <Layout leftSidebar={<LeftSidebar />}>
             <div className="grid grid-cols-10">
                 <div className="col-span-7 mr-4">
-                    <LineChartHero linechart_data={financial_data} />
+                    <LineChartHero />
                 </div>
                 <div className="col-span-3">
-                    <BarChartHero barchart_data={financial_data} />
+                    <BarChartHero />
                 </div>
             </div>
             <div className="mt-4">
-                <AccountBalanceTable
-                    balance_data={financial_data}
-                ></AccountBalanceTable>
+                <AccountBalanceTable />
             </div>
         </Layout>
     );

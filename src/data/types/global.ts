@@ -33,10 +33,6 @@ export type FinancialDataProps = {
 export type CardType = {
   title: string;
   children: ReactNode;
+  editable?: string;
   styles?: string;
 }
-
-export type SP500Growth = {
-  year: number;
-  growth: number;
-};

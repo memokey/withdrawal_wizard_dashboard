@@ -6,7 +6,6 @@ const NoticeModal = () => {
     const dispatch = useDispatch();
 
     const closeDlg = (e: any) => {
-        console.log(e.target.className);
         if (
             !!e.target.className &&
             e.target.className.includes("notice-modal")
