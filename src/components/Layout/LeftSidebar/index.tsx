@@ -92,7 +92,7 @@ const LeftSidebar = () => {
                     .from("users")
                     .select("*")
                     .eq("email", userInfo.userInfo.emails[0]);
-                if (data.length != 0) {
+                if (data != null && data.length != 0) {
                     setUserName(data[0].name);
                 }
                 if (error) {
