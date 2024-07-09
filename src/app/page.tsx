@@ -109,15 +109,18 @@ const Home = async () => {
         return <TryRefreshComponent key={Date.now()} />;
     }
 
-    const userInfoResponse = await fetch("http://localhost:3000/api/user", {
-        headers: {
-            /**
-             * We read the access token from the cookies and use that as a Bearer token when
-             * making network requests.
-             */
-            Authorization: "Bearer " + getAccessToken(),
-        },
-    });
+    const userInfoResponse = await fetch(
+        process.env.NEXT_PUBLIC_FRONTEND_URL + "/api/user",
+        {
+            headers: {
+                /**
+                 * We read the access token from the cookies and use that as a Bearer token when
+                 * making network requests.
+                 */
+                Authorization: "Bearer " + getAccessToken(),
+            },
+        }
+    );
 
     let message = "";
 
