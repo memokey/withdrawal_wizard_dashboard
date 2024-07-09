@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
 import Logo from "../Header/Logo";
 import DropDownProfile from "../Header/DropdownProfile";
@@ -13,7 +15,6 @@ import {
 } from "@remixicon/react";
 import { Badge, Divider, TextInput } from "@tremor/react";
 import { DEFAULT_INPUTS } from "@/data";
-import { usePrivy } from "@privy-io/react-auth";
 import {
     validateBeginningYear,
     validateClientAge,
@@ -27,12 +28,13 @@ import {
     setFinalGrowth,
     setIsLoading,
 } from "@/redux/slices/calcSlice";
+import { supabase } from "@/utils/supabaseClient";
+import { getInitials } from "@/utils";
 
 const LeftSidebar = () => {
-    const { user } = usePrivy();
     const dispatch = useAppDispatch();
-
     const { snGrowth, calcAction } = useAppSelector((state) => state.calc);
+    const { userInfo } = useAppSelector((state) => state.auth);
 
     // State for form inputs and errors
     const [investment, setInvestment] = useState<number>(
@@ -77,6 +79,28 @@ const LeftSidebar = () => {
     const [inParBonusWdMoneyError, setInParBonusWdMoneyError] = useState("");
     const [snRateError, setSnRateError] = useState("");
     const [snWdMoneyError, setSnWdMoneyError] = useState("");
+    const [userName, setUserName] = useState("");
+
+    useEffect(() => {
+        (async () => {
+            if (
+                userInfo &&
+                userInfo.userInfo.emails &&
+                userInfo.userInfo.emails.length != 0
+            ) {
+                const { data, error } = await supabase
+                    .from("users")
+                    .select("*")
+                    .eq("email", userInfo.userInfo.emails[0]);
+                if (data.length != 0) {
+                    setUserName(data[0].name);
+                }
+                if (error) {
+                    console.error("error", error);
+                }
+            }
+        })();
+    }, [userInfo]);
 
     const calcAccuntBalance = async () => {
         // Ignore if the validation is not correct.
@@ -315,7 +339,7 @@ const LeftSidebar = () => {
                     </div>
                     <div className="mt-[10px]">
                         <Divider className="my-2">
-                            <Badge>S&P 500 Index</Badge>
+                            <Badge color={"orange"}>S&P 500 Index</Badge>
                         </Divider>
                         <div className="col-span-full sm:col-span-3 h-[90px]">
                             <label className="text-sm leading-none text-gray-600 dark:text-gray-50 font-medium">
@@ -370,7 +394,7 @@ const LeftSidebar = () => {
                     </div>
                     <div className="mt-[10px]">
                         <Divider className="my-2">
-                            <Badge color={"orange"}>FIA + Index Par</Badge>
+                            <Badge color={"gray"}>FIA + Index Par</Badge>
                         </Divider>
                         <div className="col-span-full sm:col-span-3 h-[90px]">
                             <label className="text-sm leading-none text-gray-600 dark:text-gray-50 font-medium">
@@ -532,7 +556,7 @@ const LeftSidebar = () => {
                     </div>
                     <div className="mt-[10px]">
                         <Divider className="my-2">
-                            <Badge color={"gray"}>Structured Notes</Badge>
+                            <Badge color={"blue"}>Structured Notes</Badge>
                         </Divider>
                         <div className="col-span-full sm:col-span-3 h-[90px]">
                             <label className="text-sm leading-none text-gray-600 dark:text-gray-50 font-medium">
@@ -602,11 +626,9 @@ const LeftSidebar = () => {
                                 className="flex aspect-square size-8 items-center justify-center rounded bg-tremor-brand-primary p-2 text-xs font-medium text-white dark:bg-indigo-500"
                                 aria-hidden="true"
                             >
-                                ES
+                                {getInitials(userName)}
                             </span>
-                            <span>
-                                {user?.email ? user?.email.address : ""}
-                            </span>
+                            <span>{userName}</span>
                         </span>
                         <RiMore2Fill
                             className="size-4 shrink-0 text-gray-500 group-hover:text-gray-700 group-hover:dark:text-gray-400"

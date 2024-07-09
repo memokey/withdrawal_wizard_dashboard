@@ -1,6 +1,6 @@
 "use client";
 
-import * as DropdownMenuPrimitives from "@radix-ui/react-dropdown-menu";
+import Session from "supertokens-web-js/recipe/session";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -13,7 +13,6 @@ import {
 import { RiArrowRightUpLine } from "@remixicon/react";
 import React from "react";
 import { DropdownUserProfileProps } from "@/data/types/global";
-import { usePrivy } from "@privy-io/react-auth";
 import { useAppDispatch } from "@/redux/hooks";
 import { setIsLoading, setNoticeModal } from "@/redux/slices/calcSlice";
 
@@ -21,15 +20,13 @@ const DropDownProfile = ({
     children,
     align = "start",
 }: DropdownUserProfileProps) => {
-    const dispath = useAppDispatch();
-    const { ready, authenticated, logout, login } = usePrivy();
+    const dispatch = useAppDispatch();
+    async function logout() {
+        dispatch(setIsLoading(true));
+        await Session.signOut();
+        window.location.href = "/auth"; // or to wherever your logic page is
+    }
 
-    const signout = () => {
-        dispath(setIsLoading(true));
-        logout();
-    };
-
-    const disableLogout = !ready || (ready && !authenticated);
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>{children}</DropdownMenuTrigger>
@@ -37,7 +34,7 @@ const DropDownProfile = ({
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
                     <DropdownMenuItem
-                        onClick={() => dispath(setNoticeModal(true))}
+                        onClick={() => dispatch(setNoticeModal(true))}
                     >
                         What the tool
                         <RiArrowRightUpLine
@@ -48,10 +45,7 @@ const DropDownProfile = ({
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
-                    <DropdownMenuItem
-                        disabled={disableLogout}
-                        onClick={signout}
-                    >
+                    <DropdownMenuItem onClick={logout}>
                         Sign out
                     </DropdownMenuItem>
                 </DropdownMenuGroup>

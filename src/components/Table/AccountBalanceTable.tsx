@@ -81,22 +81,22 @@ export function AccountBalanceTable() {
                                 <TableCell>{index + 1}</TableCell>
                                 <TableCell>{bl.ages}</TableCell>
                                 <TableCell>{bl.year}</TableCell>
-                                <TableCell className="bg-[#3b82f61a]">
+                                <TableCell className="bg-[#ec732a1a]">
                                     {Math.round(bl.sp.balance)}
                                 </TableCell>
-                                <TableCell className="bg-[#3b82f61a]">
+                                <TableCell className="bg-[#ec732a1a]">
                                     {Math.round(bl.sp.growth * 100) / 100}
                                 </TableCell>
-                                <TableCell className="bg-[#3b82f61a]">
+                                <TableCell className="bg-[#ec732a1a]">
                                     {bl.sp.wdMoney}
                                 </TableCell>
-                                <TableCell className="bg-[#ec732a1a]">
+                                <TableCell className="bg-[#6060601a]">
                                     {Math.round(bl.inPar.balance)}
                                 </TableCell>
-                                <TableCell className="bg-[#ec732a1a]">
+                                <TableCell className="bg-[#6060601a]">
                                     {Math.round(bl.inPar.growth * 100) / 100}
                                 </TableCell>
-                                <TableCell className="bg-[#ec732a1a]">
+                                <TableCell className="bg-[#6060601a]">
                                     {bl.inPar.wdMoney}
                                 </TableCell>
                                 <TableCell className="bg-[#8cc44f1a]">
@@ -109,10 +109,10 @@ export function AccountBalanceTable() {
                                 <TableCell className="bg-[#8cc44f1a]">
                                     {bl.inParBonus.wdMoney}
                                 </TableCell>
-                                <TableCell className="bg-[#6060601a]">
+                                <TableCell className="bg-[#3b82f61a]">
                                     {Math.round(bl.sn.balance)}
                                 </TableCell>
-                                <TableCell className="bg-[#6060601a]">
+                                <TableCell className="bg-[#3b82f61a]">
                                     {isEditableModal ? (
                                         <TextInput
                                             placeholder="Growth"
@@ -135,7 +135,7 @@ export function AccountBalanceTable() {
                                         Math.round(bl.sn.growth * 100) / 100
                                     )}
                                 </TableCell>
-                                <TableCell className="bg-[#6060601a]">
+                                <TableCell className="bg-[#3b82f61a]">
                                     {bl.sn.wdMoney}
                                 </TableCell>
                             </TableRow>

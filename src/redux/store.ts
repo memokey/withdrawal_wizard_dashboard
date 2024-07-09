@@ -3,11 +3,13 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
 
 import calcReducer from './slices/calcSlice'
+import authReducer from './slices/authSlice'
 
 export function makeStore() {
     return configureStore({
         reducer: {
             calc: calcReducer,
+            auth: authReducer,
         },
     })
 }
