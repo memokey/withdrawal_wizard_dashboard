@@ -65,9 +65,9 @@ const NoticeModal = () => {
                                             owners how to avoid taking
                                             withdrawals in down markets.
                                             <br />
-                                            that can cannibalize an IRA’s
-                                            account value & how to avoid this
-                                            costly, irreversible mistake.
+                                            that can cannibalize an IRA account
+                                            value & how to avoid this costly,
+                                            irreversible mistake.
                                         </p>
                                     </div>
                                     <div className="space-y-4 mt-4 mb-4 ml-4">
@@ -95,8 +95,7 @@ const NoticeModal = () => {
                                                 Prevent Reverse Dollar Cost
                                                 Averaging
                                             </span>{" "}
-                                            that can decimate an IRA account
-                                            value.
+                                            that can decimate an IRA.
                                         </p>
                                         <p className="">
                                             <span className="text-green-500 text-[24px] italic">

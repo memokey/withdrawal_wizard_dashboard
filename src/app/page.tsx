@@ -10,8 +10,7 @@ import { SessionAuthForNextJS } from "./components/sessionAuthForNextJS";
 import Dashboard from "./dashboard";
 
 const client = jwksClient({
-    jwksUri:
-        "https://st-dev-0e44bcb0-3db7-11ef-85b2-855eb7db24be.aws.supertokens.io/.well-known/jwks.json",
+    jwksUri: process.env.NEXT_PUBLIC_CONNECTION_URI + "/.well-known/jwks.json",
 });
 
 function getAccessToken(): string | undefined {
