@@ -61,12 +61,13 @@ const NoticeModal = () => {
                                     </h3>
                                     <div className="mt-2 text-center">
                                         <p className="text-sm text-gray-500">
-                                            The Withdrawal Wizard was built for
-                                            IRA owners to see how taking
-                                            withdrawals in down markets can
-                                            cannibalize an IRA account value &
-                                            how this costly & irreversible
-                                            mistake can be avoided.
+                                            The Withdrawal Wizard shows IRA
+                                            owners how to avoid taking
+                                            withdrawals in down markets.
+                                            <br />
+                                            that can cannibalize an IRA’s
+                                            account value & how to avoid this
+                                            costly, irreversible mistake.
                                         </p>
                                     </div>
                                     <div className="space-y-4 mt-4 mb-4 ml-4">
