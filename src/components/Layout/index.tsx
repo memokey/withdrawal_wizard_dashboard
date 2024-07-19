@@ -4,7 +4,7 @@ import { LayoutType } from "@/data/types/global";
 import React, { useEffect } from "react";
 
 // Import the JSON file
-import { NoticeModal } from "../Common/Modal";
+import { DisclaimerModal, NoticeModal } from "../Common/Modal";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setNoticeModal } from "@/redux/slices/calcSlice";
 import { BounceLoader } from "react-spinners";
@@ -14,7 +14,9 @@ import { BounceLoader } from "react-spinners";
 const Layout = (props: LayoutType) => {
     const dispatch = useAppDispatch();
 
-    const { isNoticeModal, isLoading } = useAppSelector((state) => state.calc);
+    const { isNoticeModal, isLoading, isDisclaimerModal } = useAppSelector(
+        (state) => state.calc
+    );
 
     useEffect(() => {
         // const noticeLocalModal = localStorage.getItem("notice-modal");
@@ -35,6 +37,7 @@ const Layout = (props: LayoutType) => {
             </div>
             {!!props.footer && props.footer}
             {isNoticeModal && <NoticeModal />}
+            {isDisclaimerModal && <DisclaimerModal />}
             <div
                 className={`absolute top-0 left-0 right-0 bottom-0 w-full h-fullflex pt-[calc(50vh-30px)] pl-[calc(50vw-30px)] justify-between ${
                     isLoading ? "bg-white z-[100]" : "bg-transparent z-[-10]"

@@ -54,6 +54,19 @@ const config: Config = {
           900: '#ec732a',
           950: '#ec732a',
         },
+        purple: {
+          50: '#f4e9fb',
+          100: '#e4c8f8',
+          200: '#d3a3f4',
+          300: '#bb7aee',
+          400: '#a855f7', // Custom purple color
+          500: '#9745e3',
+          600: '#8539c1',
+          700: '#73309e',
+          800: '#60267c',
+          900: '#4d1d61',
+          950: '#34113f',
+        },
         tremor: {
           brand: {
             faint: colors.blue[50],

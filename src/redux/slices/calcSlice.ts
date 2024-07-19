@@ -5,6 +5,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 export interface CalcState {
     isNoticeModal: boolean;
     isEditableModal: boolean;
+    isDisclaimerModal: boolean;
     isEdit: string;
     snGrowth: number[];
     balances: any[];
@@ -17,6 +18,7 @@ export interface CalcState {
 const initialState: CalcState = {
     isNoticeModal: false,
     isEditableModal: false,
+    isDisclaimerModal: false,
     isEdit: "None",
     snGrowth: new Array(54).fill(0),
     balances: [],
@@ -36,6 +38,9 @@ export const calcSlice = createSlice({
         },
         setIsEditableModal(state, action: PayloadAction<boolean>) {
             state.isEditableModal = action.payload;
+        },
+        setDisclaimerModal(state, action: PayloadAction<boolean>) {
+            state.isDisclaimerModal = action.payload;
         },
         setSnGrowth(state, action: PayloadAction<number[]>) {
             state.snGrowth = action.payload;
@@ -68,6 +73,7 @@ export const calcSlice = createSlice({
 export const {
     setNoticeModal,
     setIsEditableModal,
+    setDisclaimerModal,
     setSnGrowth,
     setBalances,
     setAvgGrowth,

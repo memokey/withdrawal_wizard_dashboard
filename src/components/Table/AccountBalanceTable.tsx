@@ -9,18 +9,19 @@ import {
     TableCell,
     Callout,
     TextInput,
+    TableFoot,
 } from "@tremor/react";
 import Card from "../Common/Card";
 import "../../styles/table.css";
 
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setSnSpecificGrowth } from "@/redux/slices/calcSlice";
+import { formatCurrency } from "@/utils";
 
 export function AccountBalanceTable() {
     const dispatch = useAppDispatch();
-    const { balances, isEditableModal, snGrowth } = useAppSelector(
-        (state) => state.calc
-    );
+    const { balances, isEditableModal, snGrowth, finalGrowth, avgGrowth } =
+        useAppSelector((state) => state.calc);
     return (
         <Card title="Account Balance Table" editable="true">
             <Table className="text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">
@@ -39,7 +40,7 @@ export function AccountBalanceTable() {
                         <TableHeaderCell colSpan={3}>
                             <Callout
                                 title="FIA + Index Par"
-                                color="gray"
+                                color="purple"
                             ></Callout>
                         </TableHeaderCell>
                         <TableHeaderCell colSpan={3}>
@@ -82,35 +83,38 @@ export function AccountBalanceTable() {
                                 <TableCell>{bl.ages}</TableCell>
                                 <TableCell>{bl.year}</TableCell>
                                 <TableCell className="bg-[#ec732a1a]">
-                                    {Math.round(bl.sp.balance)}
+                                    {formatCurrency(Math.round(bl.sp.balance))}
                                 </TableCell>
                                 <TableCell className="bg-[#ec732a1a]">
-                                    {Math.round(bl.sp.growth * 100) / 100}
+                                    {bl.sp.growth.toFixed(2)}%
                                 </TableCell>
                                 <TableCell className="bg-[#ec732a1a]">
-                                    {bl.sp.wdMoney}
+                                    {formatCurrency(bl.sp.wdMoney)}
                                 </TableCell>
-                                <TableCell className="bg-[#6060601a]">
-                                    {Math.round(bl.inPar.balance)}
+                                <TableCell className="bg-[#f4ecfc]">
+                                    {formatCurrency(
+                                        Math.round(bl.inPar.balance)
+                                    )}
                                 </TableCell>
-                                <TableCell className="bg-[#6060601a]">
-                                    {Math.round(bl.inPar.growth * 100) / 100}
+                                <TableCell className="bg-[#f4ecfc]">
+                                    {bl.inPar.growth.toFixed(2)}%
                                 </TableCell>
-                                <TableCell className="bg-[#6060601a]">
-                                    {bl.inPar.wdMoney}
-                                </TableCell>
-                                <TableCell className="bg-[#8cc44f1a]">
-                                    {Math.round(bl.inParBonus.balance)}
-                                </TableCell>
-                                <TableCell className="bg-[#8cc44f1a]">
-                                    {Math.round(bl.inParBonus.growth * 100) /
-                                        100}
+                                <TableCell className="bg-[#f4ecfc]">
+                                    {formatCurrency(bl.inPar.wdMoney)}
                                 </TableCell>
                                 <TableCell className="bg-[#8cc44f1a]">
-                                    {bl.inParBonus.wdMoney}
+                                    {formatCurrency(
+                                        Math.round(bl.inParBonus.balance)
+                                    )}
+                                </TableCell>
+                                <TableCell className="bg-[#8cc44f1a]">
+                                    {bl.inParBonus.growth.toFixed(2)}%
+                                </TableCell>
+                                <TableCell className="bg-[#8cc44f1a]">
+                                    {formatCurrency(bl.inParBonus.wdMoney)}
                                 </TableCell>
                                 <TableCell className="bg-[#3b82f61a]">
-                                    {Math.round(bl.sn.balance)}
+                                    {formatCurrency(Math.round(bl.sn.balance))}
                                 </TableCell>
                                 <TableCell className="bg-[#3b82f61a]">
                                     {isEditableModal ? (
@@ -132,16 +136,98 @@ export function AccountBalanceTable() {
                                             }
                                         />
                                     ) : (
-                                        Math.round(bl.sn.growth * 100) / 100
-                                    )}
+                                        bl.sn.growth.toFixed(2) + "%"
+                                    )}{" "}
                                 </TableCell>
                                 <TableCell className="bg-[#3b82f61a]">
-                                    {bl.sn.wdMoney}
+                                    {formatCurrency(bl.sn.wdMoney)}
                                 </TableCell>
                             </TableRow>
                         );
                     })}
                 </TableBody>
+                <TableFoot>
+                    <TableRow key={"final-row"} className="font-extrabold">
+                        <TableCell
+                            rowSpan={1}
+                            colSpan={3}
+                            className="text-center"
+                        >
+                            <span>{"Total"}</span>
+                        </TableCell>
+                        <TableCell className="bg-[#ec732a1a]">
+                            {formatCurrency(Math.round(finalGrowth.spBalance))}
+                        </TableCell>
+                        <TableCell className=""></TableCell>
+                        <TableCell className=""></TableCell>
+                        <TableCell className="bg-[#f4ecfc]">
+                            {formatCurrency(
+                                Math.round(finalGrowth.inParBalance)
+                            )}
+                        </TableCell>
+                        <TableCell className=""></TableCell>
+                        <TableCell className=""></TableCell>
+                        <TableCell className="bg-[#8cc44f1a]">
+                            {formatCurrency(
+                                Math.round(finalGrowth.inParBonusBalance)
+                            )}
+                        </TableCell>
+                        <TableCell className=""></TableCell>
+                        <TableCell className=""></TableCell>
+                        <TableCell className="bg-[#3b82f61a]">
+                            {formatCurrency(Math.round(finalGrowth.snBalance))}
+                        </TableCell>
+                        <TableCell className=""></TableCell>
+                        <TableCell className=""></TableCell>
+                    </TableRow>
+                    <TableRow key={"avg-row"} className="font-extrabold">
+                        <TableCell
+                            rowSpan={1}
+                            colSpan={3}
+                            className="text-center"
+                        ></TableCell>
+                        <TableCell className="bg-[#ec732a1a]">
+                            Avg ROR
+                        </TableCell>
+                        <TableCell
+                            className="bg-[#ec732a1a] text-center"
+                            colSpan={2}
+                        >
+                            {!!avgGrowth.sp ? avgGrowth.sp.toFixed(2) : 0.0}%
+                        </TableCell>
+                        <TableCell className="bg-[#f4ecfc]">Avg ROR</TableCell>
+                        <TableCell
+                            className="bg-[#f4ecfc] text-center"
+                            colSpan={2}
+                        >
+                            {!!avgGrowth.inPar
+                                ? avgGrowth.inPar.toFixed(2)
+                                : 0.0}{" "}
+                            %
+                        </TableCell>
+                        <TableCell className="bg-[#8cc44f1a]">
+                            Avg ROR
+                        </TableCell>
+                        <TableCell
+                            className="bg-[#8cc44f1a] text-center"
+                            colSpan={2}
+                        >
+                            {!!avgGrowth.inParBonus
+                                ? avgGrowth.inParBonus.toFixed(2)
+                                : 0.0}{" "}
+                            %
+                        </TableCell>
+                        <TableCell className="bg-[#3b82f61a]">
+                            Avg ROR
+                        </TableCell>
+                        <TableCell
+                            className="bg-[#3b82f61a] text-center"
+                            colSpan={2}
+                        >
+                            {!!avgGrowth.sn ? avgGrowth.sn.toFixed(2) : 0.0}%
+                        </TableCell>
+                    </TableRow>
+                </TableFoot>
             </Table>
         </Card>
     );

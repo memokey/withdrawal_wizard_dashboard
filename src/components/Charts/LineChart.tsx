@@ -31,7 +31,7 @@ export function LineChartHero() {
                     "FIA + Index Par + Bonus",
                     "Struntured Notes",
                 ]}
-                colors={["orange", "gray", "green", "blue"]}
+                colors={["orange", "purple", "green", "blue"]}
                 valueFormatter={dataFormatter}
                 yAxisWidth={80}
                 onValueChange={(v) => console.log(v)}

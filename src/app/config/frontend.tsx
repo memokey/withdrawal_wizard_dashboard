@@ -58,6 +58,12 @@ export const frontendConfig = (): SuperTokensConfig => {
             [data-supertokens=superTokensBranding] {
                 display: none;
             }
+            [data-supertokens=link] {
+                color: #78a942;
+            }
+            [data-supertokens="link linkButton formLabelLinkBtn forgotPasswordLink"] {
+                color: #78a942;
+            }
         `,
     };
 };

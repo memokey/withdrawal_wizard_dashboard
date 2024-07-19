@@ -13,19 +13,19 @@ export function BarChartHero() {
     const chart_data = [
         {
             name: "S&P 500",
-            "S&P 500": avgGrowth.sp,
+            "S&P 500": Math.round(avgGrowth.sp * 100) / 100,
         },
         {
             name: "FIA",
-            FIA: avgGrowth.inPar,
+            FIA: Math.round(avgGrowth.inPar * 100) / 100,
         },
         {
             name: "FIA+B",
-            "FIA+B": avgGrowth.inParBonus,
+            "FIA+B": Math.round(avgGrowth.inParBonus * 100) / 100,
         },
         {
             name: "SN",
-            SN: avgGrowth.sn,
+            SN: Math.round(avgGrowth.sn * 100) / 100,
         },
     ];
     return (
@@ -35,7 +35,7 @@ export function BarChartHero() {
                 data={chart_data}
                 index="name"
                 categories={["S&P 500", "FIA", "FIA+B", "SN"]}
-                colors={["orange", "gray", "green", "blue"]}
+                colors={["orange", "purple", "green", "blue"]}
                 valueFormatter={dataFormatter}
                 yAxisWidth={36}
             />

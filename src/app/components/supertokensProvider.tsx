@@ -94,36 +94,29 @@ export const SuperTokensProvider: React.FC<React.PropsWithChildren<{}>> = ({
                             <div
                                 className="col-span-3 border-l border-l-[#b2b2b2] py-10 rounded-r-[20px]"
                                 style={{
-                                    background:
-                                        "linear-gradient(to bottom right, #78a942, #ec732a)",
+                                    background: "#78a942",
                                 }}
                             >
                                 <div className="text-center p-16 mt-[7vh]">
                                     <div className="flex justify-center mb-10">
                                         <img
-                                            src="/images/Logo-02.png"
+                                            src="/images/Logo-03.png"
                                             alt="Withdrawal Wizard Logo"
                                             className="w-[350px] mb-5"
                                         />
                                     </div>
-                                    <div className="text-tremor-brand-secondary text-left text-[22px] grid gap-2 leading-[48px]">
+                                    <div className="text-[#525252] gap-4 text-left text-[22px] grid gap-2 leading-[36px]">
                                         <p>
-                                            <span className="text-tremor-brand-primary">
-                                                1.
-                                            </span>{" "}
-                                            Prevent The IRA Death Spiral.
+                                            <span className="">1.</span> Prevent
+                                            The IRA Death Spiral.
                                         </p>
                                         <p>
-                                            <span className="text-tremor-brand-primary">
-                                                2.
-                                            </span>{" "}
-                                            Protect Your Retirement Income.
+                                            <span className="">2.</span> Protect
+                                            Your Retirement Income.
                                         </p>
                                         <p>
-                                            <span className="text-tremor-brand-primary">
-                                                3.
-                                            </span>{" "}
-                                            Predict And Maximize Your
+                                            <span className="">3.</span> Predict
+                                            And Maximize Your
                                             &nbsp;&nbsp;&nbsp;&nbsp;Retirement
                                             Income.
                                         </p>

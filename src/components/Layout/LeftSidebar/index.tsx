@@ -394,7 +394,7 @@ const LeftSidebar = () => {
                     </div>
                     <div className="mt-[10px]">
                         <Divider className="my-2">
-                            <Badge color={"gray"}>FIA + Index Par</Badge>
+                            <Badge color={"purple"}>FIA + Index Par</Badge>
                         </Divider>
                         <div className="col-span-full sm:col-span-3 h-[90px]">
                             <label className="text-sm leading-none text-gray-600 dark:text-gray-50 font-medium">

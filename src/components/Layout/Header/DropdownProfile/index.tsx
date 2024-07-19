@@ -14,7 +14,11 @@ import { RiArrowRightUpLine } from "@remixicon/react";
 import React from "react";
 import { DropdownUserProfileProps } from "@/data/types/global";
 import { useAppDispatch } from "@/redux/hooks";
-import { setIsLoading, setNoticeModal } from "@/redux/slices/calcSlice";
+import {
+    setIsLoading,
+    setNoticeModal,
+    setDisclaimerModal,
+} from "@/redux/slices/calcSlice";
 
 const DropDownProfile = ({
     children,
@@ -33,6 +37,15 @@ const DropDownProfile = ({
             <DropdownMenuContent align={align}>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
+                    <DropdownMenuItem
+                        onClick={() => dispatch(setDisclaimerModal(true))}
+                    >
+                        Disclaimer
+                        <RiArrowRightUpLine
+                            className="mb-1 ml-1 size-2.5 shrink-0 text-gray-500"
+                            aria-hidden="true"
+                        />
+                    </DropdownMenuItem>
                     <DropdownMenuItem
                         onClick={() => dispatch(setNoticeModal(true))}
                     >

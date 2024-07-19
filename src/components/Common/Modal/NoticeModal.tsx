@@ -30,7 +30,7 @@ const NoticeModal = () => {
                 onClick={(e) => closeDlg(e)}
             >
                 <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0 notice-modal">
-                    <div className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-2xl">
+                    <div className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-[37vw]">
                         <div className="bg-white px-4 pb-4 !pt-[32px] sm:p-6 sm:pb-4">
                             <div className="w-full flex justify-center my-4">
                                 <div className="flex h-24 w-24 flex-shrink-0 items-center justify-center rounded-full bg-green-100 sm:mx-0 sm:h-16 sm:w-16">
@@ -60,14 +60,13 @@ const NoticeModal = () => {
                                         Wizard
                                     </h3>
                                     <div className="mt-2 text-center">
-                                        <p className="text-sm text-gray-500">
-                                            The Withdrawal Wizard shows IRA
-                                            owners how to avoid taking
-                                            withdrawals in down markets.
-                                            <br />
-                                            that can cannibalize an IRA account
-                                            value & how to avoid this costly,
-                                            irreversible mistake.
+                                        <p className="text-sm text-gray-500 leading-sm">
+                                            The Withdrawal Wizard was built for
+                                            IRA owners to see how taking
+                                            withdrawals in down markets can
+                                            cannibalize an IRA’s account value &
+                                            how this costly & irreversible
+                                            mistake can be avoided.
                                         </p>
                                     </div>
                                     <div className="space-y-4 mt-4 mb-4 ml-4">
@@ -95,7 +94,8 @@ const NoticeModal = () => {
                                                 Prevent Reverse Dollar Cost
                                                 Averaging
                                             </span>{" "}
-                                            that can decimate an IRA.
+                                            that can decimate an IRA account
+                                            value.
                                         </p>
                                         <p className="">
                                             <span className="text-green-500 text-[24px] italic">
