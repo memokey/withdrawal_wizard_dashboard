@@ -80,7 +80,7 @@ export const backendConfig = (): TypeInput => {
                 },
             }),
             Dashboard.init({
-                admins: ["bob@wealthpilots.net"],
+                admins: ["nickchang996@gmail.com"],
             }),
             UserRoles.init(),
             SessionNode.init(),
